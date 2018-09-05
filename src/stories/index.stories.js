@@ -5,6 +5,7 @@ import {action} from '@storybook/addon-actions'
 import {linkTo} from '@storybook/addon-links'
 import { withKnobs, text, boolean, number } from '@storybook/addon-knobs';
 import { withNotes } from '@storybook/addon-notes'
+import VueInfoAddon from 'storybook-addon-vue-info'
 
 import MyButton from './MyButton.vue'
 import Welcome from './Welcome.vue'
@@ -17,6 +18,7 @@ storiesOf('Welcome', module).add('to Storybook', () => ({
 }))
 
 storiesOf('Button', module)
+  .addDecorator(VueInfoAddon)
   .addDecorator(withKnobs)
   .add('with text knobs', withNotes(
     `これはボタンです`

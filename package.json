@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@storybook/addon-notes": "^3.4.10",
+    "storybook-addon-vue-info": "^0.6.1",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },
