@@ -3,6 +3,7 @@
 import {storiesOf} from '@storybook/vue'
 import {action} from '@storybook/addon-actions'
 import {linkTo} from '@storybook/addon-links'
+import { withKnobs, text, boolean, number } from '@storybook/addon-knobs';
 
 import MyButton from './MyButton.vue'
 import Welcome from './Welcome.vue'
@@ -15,24 +16,25 @@ storiesOf('Welcome', module).add('to Storybook', () => ({
 }))
 
 storiesOf('Button', module)
-  .add('with text', () => ({
-    components: {MyButton},
-    template: '<my-button @click="action">Hello Button</my-button>',
-    methods: {action: action('clicked')},
-  }))
-  // .add('with JSX', () => ({
-  //   components: { MyButton },
-  //   render() {
-  //     return <my-button onClick={this.action}>With JSX</my-button>;
-  //   },
-  //   methods: { action: linkTo('clicked') },
-  // }))
-  .add('with some emoji', () => ({
-    components: {MyButton},
-    template:
-      '<my-button @click="action"><span role="img" aria-label="so cool">😀 😎 👍 💯</span></my-button>',
-    methods: {action: action('clicked')},
-  }))
+  .addDecorator(withKnobs)
+  .add('with text knobs', () => {
+    const slot = text('Slot', 'Hello KNOBS');
+
+    return {
+      components: {MyButton},
+      template: `<my-button @click="action">${slot}</my-button>`,
+      methods: {action: action('clicked')},
+    }
+  })
+  .add('with some emoji', () => {
+    const slot = text('Slot', '<span role="img" aria-label="so cool">😀 😎 👍 💯</span>');
+
+    return {
+      components: {MyButton},
+      template: `<my-button @click="action">${slot}</my-button>`,
+      methods: {action: action('clicked')},
+    }
+  })
 
 storiesOf('Hello World', module).add('to Storybook', () => ({
   components: {HelloWorld},

@@ -5,15 +5,23 @@
 </template>
 
 <script>
-export default {
+import Vue from 'vue';
+
+export default Vue.extend({
   name: 'my-button',
+
+  props: {
+    text: {
+      type: String
+    },
+  },
 
   methods: {
     onClick () {
       this.$emit('click')
     }
   }
-}
+})
 </script>
 
 <style>
