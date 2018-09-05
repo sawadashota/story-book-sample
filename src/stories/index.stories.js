@@ -4,6 +4,7 @@ import {storiesOf} from '@storybook/vue'
 import {action} from '@storybook/addon-actions'
 import {linkTo} from '@storybook/addon-links'
 import { withKnobs, text, boolean, number } from '@storybook/addon-knobs';
+import { withNotes } from '@storybook/addon-notes'
 
 import MyButton from './MyButton.vue'
 import Welcome from './Welcome.vue'
@@ -17,7 +18,9 @@ storiesOf('Welcome', module).add('to Storybook', () => ({
 
 storiesOf('Button', module)
   .addDecorator(withKnobs)
-  .add('with text knobs', () => {
+  .add('with text knobs', withNotes(
+    `これはボタンです`
+  )(() => {
     const slot = text('Slot', 'Hello KNOBS');
 
     return {
@@ -25,8 +28,10 @@ storiesOf('Button', module)
       template: `<my-button @click="action">${slot}</my-button>`,
       methods: {action: action('clicked')},
     }
-  })
-  .add('with some emoji', () => {
+  }))
+  .add('with some emoji', withNotes(
+    `絵文字も使えます`
+  )(() => {
     const slot = text('Slot', '<span role="img" aria-label="so cool">😀 😎 👍 💯</span>');
 
     return {
@@ -34,7 +39,7 @@ storiesOf('Button', module)
       template: `<my-button @click="action">${slot}</my-button>`,
       methods: {action: action('clicked')},
     }
-  })
+  }))
 
 storiesOf('Hello World', module).add('to Storybook', () => ({
   components: {HelloWorld},
